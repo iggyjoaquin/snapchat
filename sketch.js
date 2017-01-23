@@ -78,7 +78,7 @@ function setup() {
 }
 
 function draw() {
-  	tint(255);
+  tint(255);
 	background(255);
 	imageMode(CORNER);
 	image(capture, 0, 0, WIDTH, HEIGHT);
@@ -123,8 +123,8 @@ function draw() {
 
 		if (state == 2){ //moustache
 			// draws moustache between botttom of nose and upperlip
-	    	var upperLipNoseDistance = dist(faceArray[37][0], faceArray[37][1], faceArray[47][0], faceArray[47][1]);
-	    	var mouthWidth = dist(faceArray[44][0], faceArray[44][1], faceArray[50][0], faceArray[50][1]);
+    	var upperLipNoseDistance = dist(faceArray[37][0], faceArray[37][1], faceArray[47][0], faceArray[47][1]);
+    	var mouthWidth = dist(faceArray[44][0], faceArray[44][1], faceArray[50][0], faceArray[50][1]);
 			image(moustacheImage, faceArray[37][0], faceArray[37][1], mouthWidth, upperLipNoseDistance);		
 		}
 
@@ -178,9 +178,24 @@ function draw() {
 			}
 		}
 	}
-
 }
 
+// if space is pressed, takes picture
+function keyPressed() {
+  if (keyCode == 32) {
+    redraw();
+    takePicture();
+  }
+}
+
+function takePicture() {
+  // grabs all pixels from canvas
+  var picturePixels = get(0, 0, WIDTH, HEIGHT);
+  var randomID = Math.floor((Math.random() * 1000) + 1);
+  // saves picture and names it with an ID
+  save(picturePixels, 'snapchat_clone_' + randomID + '.png');
+  console.log("Picture taken! You look great!")
+}
 
 function takePicture() {
   // grabs all pixels from canvas
